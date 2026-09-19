@@ -1,0 +1,20 @@
+{
+  "name": "rag-compliance-assistant",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "dev:convex": "convex dev",
+    "build": "next build",
+    "start": "next start",
+    "ingest": "node scripts/ingest.js"
+  },
+  "dependencies": {
+    "convex": "^1.17.0",
+    "dotenv": "^16.4.5",
+    "next": "14.2.5",
+    "pdf-parse": "^1.1.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  }
+}

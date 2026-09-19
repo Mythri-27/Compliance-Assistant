@@ -1,0 +1,1220 @@
+[
+  {
+    "controlId": "ISO27001-A.5.1",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Policies for information security",
+    "text": "Leadership must define, approve, publish, and periodically review an information security policy plus supporting topic-specific policies, and ensure relevant staff and parties are aware of them.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.5.2",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Information security roles and responsibilities",
+    "text": "Security roles and responsibilities must be clearly assigned across the organization according to its needs.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.5.3",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Segregation of duties",
+    "text": "Duties and areas of responsibility that could conflict should be separated to reduce the risk of unauthorized or unintentional actions.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.5.4",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Management responsibilities",
+    "text": "Managers must require all personnel to apply information security consistent with established policies and procedures.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.5.5",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Contact with authorities",
+    "text": "The organization should establish and maintain contact with relevant government and regulatory authorities.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.5.6",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Contact with special interest groups",
+    "text": "The organization should maintain relationships with security-focused industry groups, forums, and professional associations.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.5.7",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Threat intelligence",
+    "text": "Information about security threats should be collected and analyzed to produce usable threat intelligence.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.5.8",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Information security in project management",
+    "text": "Security considerations must be integrated into how projects are planned and executed.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.5.9",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Inventory of information and other associated assets",
+    "text": "An inventory of information and other assets, including their owners, should be developed and kept current.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.5.10",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Acceptable use of information and other associated assets",
+    "text": "Rules for properly using and handling information and assets should be documented, communicated, and implemented.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.5.11",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Return of assets",
+    "text": "Personnel and other parties must return organizational assets in their possession when employment or a contract ends.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.5.12",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Classification of information",
+    "text": "Information should be classified according to confidentiality, integrity, availability, and relevant stakeholder requirements.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.5.13",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Labelling of information",
+    "text": "Procedures for labelling information should be developed and applied consistent with the organization's classification scheme.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.5.14",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Information transfer",
+    "text": "Rules, procedures, or agreements should govern how information is transferred within the organization and with external parties.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.5.15",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Access control",
+    "text": "Rules for physical and logical access to information and assets should be established based on business and security requirements.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.5.16",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Identity management",
+    "text": "The full lifecycle of user identities should be managed from creation through deactivation.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.5.17",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Authentication information",
+    "text": "Issuance and handling of authentication credentials should be controlled through a formal process, with guidance given to personnel.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.5.18",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Access rights",
+    "text": "Access rights should be provisioned, reviewed, modified, and removed in line with the organization's access control policy.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.5.19",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Information security in supplier relationships",
+    "text": "Processes should be defined to manage security risks arising from the use of suppliers' products or services.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.5.20",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Addressing information security within supplier agreements",
+    "text": "Security requirements should be agreed with each supplier based on the nature of the relationship.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.5.21",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Managing information security in the ICT supply chain",
+    "text": "Processes should address the security risks present across the ICT products and services supply chain.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.5.22",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Monitoring, review and change management of supplier services",
+    "text": "Supplier security practices and service delivery should be regularly monitored, reviewed, and managed as they change.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.5.23",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Information security for use of cloud services",
+    "text": "Processes should govern the acquisition, use, management, and exit from cloud services consistent with security requirements.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.5.24",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Information security incident management planning and preparation",
+    "text": "Roles, responsibilities, and processes for handling security incidents should be defined and communicated in advance.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.5.25",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Assessment and decision on information security events",
+    "text": "Security events should be assessed to decide whether they should be classified as incidents.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.5.26",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Response to information security incidents",
+    "text": "Security incidents should be handled according to documented response procedures.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.5.27",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Learning from information security incidents",
+    "text": "Knowledge gained from past incidents should be used to strengthen and improve controls.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.5.28",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Collection of evidence",
+    "text": "Procedures should govern the identification, collection, acquisition, and preservation of evidence related to security events.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.5.29",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Information security during disruption",
+    "text": "Plans should maintain an appropriate level of security during disruptive events.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.5.30",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "ICT readiness for business continuity",
+    "text": "ICT continuity capability should be planned, implemented, maintained, and tested against business continuity objectives.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.5.31",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Legal, statutory, regulatory and contractual requirements",
+    "text": "Applicable legal and contractual security obligations should be identified, documented, and kept up to date.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.5.32",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Intellectual property rights",
+    "text": "Appropriate procedures should protect intellectual property rights.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.5.33",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Protection of records",
+    "text": "Records should be protected from loss, destruction, falsification, and unauthorized access or release.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.5.34",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Privacy and protection of PII",
+    "text": "The organization should identify and meet applicable privacy and PII protection obligations under law, regulation, and contract.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.5.35",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Independent review of information security",
+    "text": "The organization's approach to managing security should be reviewed independently at planned intervals or after significant change.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.5.36",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Compliance with policies, rules and standards for information security",
+    "text": "Adherence to the organization's security policies and standards should be reviewed on a regular basis.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.5.37",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Documented operating procedures",
+    "text": "Operating procedures for information processing facilities should be documented and made available to the personnel who need them.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.6.1",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Screening",
+    "text": "Background checks on candidates and personnel should occur before and during employment, proportional to role risk and data sensitivity, and consistent with applicable law.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.6.2",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Terms and conditions of employment",
+    "text": "Employment contracts should state both the employee's and the organization's information security responsibilities.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.6.3",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Information security awareness, education and training",
+    "text": "Personnel should receive ongoing security awareness training and updates relevant to their job function.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.6.4",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Disciplinary process",
+    "text": "A formal, communicated disciplinary process should address violations of information security policy.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.6.5",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Responsibilities after termination or change of employment",
+    "text": "Security duties that remain valid after a role or employment change should be defined, enforced, and communicated.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.6.6",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Confidentiality or non-disclosure agreements",
+    "text": "NDAs reflecting the organization's protection needs should be documented, reviewed regularly, and signed by relevant parties.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.6.7",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Remote working",
+    "text": "Security measures should protect information accessed, processed, or stored by personnel working outside company premises.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.6.8",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Information security event reporting",
+    "text": "Personnel should have a clear, timely mechanism to report observed or suspected security events.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.7.1",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Physical security perimeters",
+    "text": "Defined security perimeters should protect areas that contain information and other assets.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.7.2",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Physical entry",
+    "text": "Secure areas should be protected by appropriate entry controls and access points.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.7.3",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Securing offices, rooms and facilities",
+    "text": "Physical security should be designed and implemented for offices, rooms, and facilities.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.7.4",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Physical security monitoring",
+    "text": "Premises should be continuously monitored for unauthorized physical access.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.7.5",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Protecting against physical and environmental threats",
+    "text": "Protections should be designed against natural disasters and other intentional or unintentional physical threats.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.7.6",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Working in secure areas",
+    "text": "Specific security measures should govern work carried out in secure areas.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.7.7",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Clear desk and clear screen",
+    "text": "Policies should require clearing desks of sensitive papers and media, and locking unattended screens.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.7.8",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Equipment siting and protection",
+    "text": "Equipment should be sited and protected to reduce risk from environmental threats and unauthorized access.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.7.9",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Security of assets off-premises",
+    "text": "Assets used or stored outside company premises should be protected.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.7.10",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Storage media",
+    "text": "Storage media should be managed securely through acquisition, use, transport, and disposal per classification requirements.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.7.11",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Supporting utilities",
+    "text": "Facilities should be protected from power failures and other disruptions to supporting utilities.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.7.12",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Cabling security",
+    "text": "Power and data cabling should be protected from interception, interference, or damage.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.7.13",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Equipment maintenance",
+    "text": "Equipment should be maintained correctly to preserve availability, integrity, and confidentiality of information.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.7.14",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Secure disposal or re-use of equipment",
+    "text": "Equipment containing storage media should be checked to ensure sensitive data and licensed software are removed before disposal or reuse.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.8.1",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "User endpoint devices",
+    "text": "Information stored on, processed by, or accessible via user endpoint devices should be protected.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.8.2",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Privileged access rights",
+    "text": "Allocation and use of privileged access should be restricted and tightly managed.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.8.3",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Information access restriction",
+    "text": "Access to information and assets should be restricted according to the organization's access control policy.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.8.4",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Access to source code",
+    "text": "Read and write access to source code, development tools, and libraries should be appropriately controlled.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.8.5",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Secure authentication",
+    "text": "Secure authentication technologies and procedures should align with access restrictions and policy.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.8.6",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Capacity management",
+    "text": "Resource use should be monitored and tuned to current and expected capacity needs.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.8.7",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Protection against malware",
+    "text": "Malware protection should be implemented and supported by user awareness.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.8.8",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Management of technical vulnerabilities",
+    "text": "Vulnerability information should be obtained, exposure evaluated, and appropriate remediation taken.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.8.9",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Configuration management",
+    "text": "Secure configurations for hardware, software, services, and networks should be established, documented, and monitored.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.8.10",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Information deletion",
+    "text": "Information should be deleted from systems, devices, or media when no longer required.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.8.11",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Data masking",
+    "text": "Data masking should be applied consistent with access control policy, related policies, and applicable law.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.8.12",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Data leakage prevention",
+    "text": "Leakage-prevention measures should be applied to systems, networks, and devices handling sensitive information.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.8.13",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Information backup",
+    "text": "Backup copies should be maintained and regularly tested per the organization's backup policy.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.8.14",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Redundancy of information processing facilities",
+    "text": "Processing facilities should include redundancy sufficient to meet availability requirements.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.8.15",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Logging",
+    "text": "Logs of activities, exceptions, faults, and other relevant events should be produced, stored, protected, and analyzed.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.8.16",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Monitoring activities",
+    "text": "Networks, systems, and applications should be monitored for anomalies indicating potential incidents.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.8.17",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Clock synchronization",
+    "text": "System clocks should be synchronized to an approved time source.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.8.18",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Use of privileged utility programs",
+    "text": "Use of utilities capable of overriding system or application controls should be restricted and tightly controlled.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.8.19",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Installation of software on operational systems",
+    "text": "Software installation on production systems should follow secure, defined procedures.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.8.20",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Networks security",
+    "text": "Networks and network devices should be secured, managed, and controlled to protect information.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.8.21",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Security of network services",
+    "text": "Security mechanisms, service levels, and requirements for network services should be identified, implemented, and monitored.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.8.22",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Segregation of networks",
+    "text": "Groups of services, users, and systems should be segregated across the organization's networks.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.8.23",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Web filtering",
+    "text": "Access to external websites should be managed to reduce exposure to malicious content.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.8.24",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Use of cryptography",
+    "text": "Rules for effective use of cryptography, including key management, should be defined and implemented.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.8.25",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Secure development life cycle",
+    "text": "Rules for secure software and system development should be established and applied.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.8.26",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Application security requirements",
+    "text": "Security requirements should be identified, specified, and approved when developing or acquiring applications.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.8.27",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Secure system architecture and engineering principles",
+    "text": "Secure engineering principles should be established, documented, and applied to system development activities.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.8.28",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Secure coding",
+    "text": "Secure coding principles should be applied throughout software development.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.8.29",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Security testing in development and acceptance",
+    "text": "Security testing should be defined and carried out as part of the development lifecycle.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.8.30",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Outsourced development",
+    "text": "Outsourced development activities should be directed, monitored, and reviewed by the organization.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.8.31",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Separation of development, test and production environments",
+    "text": "Development, test, and production environments should be separated and secured from one another.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.8.32",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Change management",
+    "text": "Changes to information processing facilities and systems should follow formal change management procedures.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.8.33",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Test information",
+    "text": "Test data should be appropriately selected, protected, and managed.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "ISO27001-A.8.34",
+    "sourceDoc": "ISO/IEC 27001:2022 Annex A",
+    "section": "Protection of information systems during audit testing",
+    "text": "Audit tests and assurance activities involving operational systems should be planned and agreed with management in advance.",
+    "framework": "ISO27001"
+  },
+  {
+    "controlId": "SOC2-CC1.1",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Commitment to Integrity and Ethical Values",
+    "text": "Leadership sets the tone at the top, establishes standards of conduct, evaluates adherence to them, and addresses deviations in a timely way, including for contractors and vendor staff.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-CC1.2",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Board Independence and Oversight",
+    "text": "The board of directors operates independently from management, brings relevant expertise, and oversees the design and performance of internal control.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-CC1.3",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Structures, Reporting Lines and Authority",
+    "text": "Management, with board oversight, establishes organizational structures, reporting lines, and appropriate authority and responsibility to pursue its objectives.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-CC1.4",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Commitment to Competence",
+    "text": "The organization commits to attracting, developing, and retaining personnel who are competent to meet its objectives.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-CC1.5",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Accountability for Internal Control",
+    "text": "Individuals are held accountable for their internal control responsibilities in pursuit of the entity's objectives.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-CC2.1",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Quality Information",
+    "text": "The organization obtains or generates and uses relevant, quality information to support internal control.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-CC2.2",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Internal Communication",
+    "text": "The organization internally communicates information needed to support internal control, including objectives and responsibilities.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-CC2.3",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "External Communication",
+    "text": "The organization communicates with external parties about matters affecting internal control.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-CC3.1",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Clear Objectives",
+    "text": "Objectives are specified with enough clarity to allow identification and assessment of related risks.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-CC3.2",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Risk Identification and Analysis",
+    "text": "Risks to achieving objectives are identified across the organization and analyzed to determine how they should be managed.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-CC3.3",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Fraud Risk Consideration",
+    "text": "The potential for fraud is considered when assessing risks to objectives.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-CC3.4",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Identifying Significant Change",
+    "text": "Changes that could significantly affect the system of internal control are identified and assessed.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-CC4.1",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Ongoing and Separate Evaluations",
+    "text": "Ongoing and/or separate evaluations confirm whether internal control components are present and functioning.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-CC4.2",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Communicating Deficiencies",
+    "text": "Internal control deficiencies are evaluated and communicated promptly to those responsible for corrective action.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-CC5.1",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Selecting Control Activities",
+    "text": "Control activities are selected and developed to mitigate risk to acceptable levels.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-CC5.2",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Technology Control Activities",
+    "text": "General control activities over technology are selected and developed to support the achievement of objectives.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-CC5.3",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Deploying Policies and Procedures",
+    "text": "Control activities are deployed through policies that set expectations and procedures that put them into effect.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-CC6.1",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Logical Access Security",
+    "text": "Logical access security software, infrastructure, and architecture protect information assets from security events.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-CC6.2",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "User Registration and Deprovisioning",
+    "text": "New users are registered and authorized before credentials are issued, and access is removed once no longer needed.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-CC6.3",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Least Privilege Access Management",
+    "text": "Access to data, software, functions, and other protected assets is authorized, modified, or removed based on role and least-privilege/segregation-of-duties principles.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-CC6.4",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Physical Access Restriction",
+    "text": "Physical access to facilities and protected assets is restricted to authorized personnel.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-CC6.5",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Retiring Protections on Assets",
+    "text": "Logical and physical protections on assets are removed only after data recovery from them is no longer possible or required.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-CC6.6",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Protection from External Threats",
+    "text": "Logical access measures protect against threats originating outside the entity's system boundaries.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-CC6.7",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Controlling Information Transmission",
+    "text": "Transmission, movement, and removal of information are restricted to authorized users and processes and protected while in transit.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-CC6.8",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Malicious Software Controls",
+    "text": "Controls prevent, detect, and act on the introduction of unauthorized or malicious software.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-CC7.1",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Vulnerability Detection",
+    "text": "Detection and monitoring procedures identify configuration changes that introduce vulnerabilities and newly discovered vulnerabilities.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-CC7.2",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Anomaly Monitoring",
+    "text": "System components and their operation are monitored for anomalies indicating malicious activity, disasters, or errors.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-CC7.3",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Security Event Evaluation",
+    "text": "Security events are evaluated to determine whether they constitute incidents, with action taken accordingly.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-CC7.4",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Incident Response",
+    "text": "Identified security incidents are handled through a defined incident-response program covering containment, remediation, and communication.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-CC7.5",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Incident Recovery",
+    "text": "Activities to recover from identified security incidents are developed and implemented.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-CC8.1",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Change Management",
+    "text": "Changes to infrastructure, data, software, and procedures are authorized, developed, tested, approved, and implemented in a controlled way.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-CC9.1",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Business Disruption Risk Mitigation",
+    "text": "Risk mitigation activities address risks arising from potential business disruptions.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-CC9.2",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Vendor and Business Partner Risk",
+    "text": "Risks associated with vendors and business partners are assessed and managed.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-A1.1",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Capacity Management",
+    "text": "Current processing capacity and system component usage are monitored and evaluated to manage demand and enable added capacity.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-A1.2",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Backup and Recovery Infrastructure",
+    "text": "Environmental protections, backup processes, and recovery infrastructure are implemented, operated, and monitored.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-A1.3",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Recovery Plan Testing",
+    "text": "Recovery plan procedures supporting system recovery are tested.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-C1.1",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Identifying Confidential Information",
+    "text": "Confidential information is identified and maintained consistent with confidentiality objectives.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-C1.2",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Disposal of Confidential Information",
+    "text": "Confidential information is securely disposed of when it no longer needs to be retained.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-PI1.1",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Quality Processing Information",
+    "text": "Relevant, quality information about processing objectives, including data and product/service specifications, is generated and communicated.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-PI1.2",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Input Controls",
+    "text": "Policies and procedures over system inputs ensure completeness and accuracy of processing.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-PI1.3",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Processing Controls",
+    "text": "Policies and procedures over system processing produce accurate products, services, and reports.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-PI1.4",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Output Controls",
+    "text": "Output is made available or delivered completely, accurately, and on time per specifications.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-PI1.5",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Storage Controls",
+    "text": "Inputs, in-process items, and outputs are stored completely and accurately per system specifications.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-P1.1",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Privacy Notice",
+    "text": "Data subjects are given notice of the entity's privacy practices, updated and communicated promptly when practices change.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-P2.1",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Choice and Consent",
+    "text": "Choices about collection, use, retention, disclosure, and disposal of personal information are communicated, with explicit consent obtained where required.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-P3.1",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Collection Consistent with Objectives",
+    "text": "Personal information is collected consistent with the entity's privacy objectives.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-P3.2",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Consent Prior to Collection",
+    "text": "Where explicit consent is required, its necessity and the consequences of declining are communicated and consent is obtained before collection.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-P4.1",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Limiting Use",
+    "text": "Use of personal information is limited to the purposes identified in the entity's privacy objectives.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-P4.2",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Retention",
+    "text": "Personal information is retained only as consistent with the entity's privacy objectives.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-P4.3",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Secure Disposal",
+    "text": "Personal information is securely disposed of to meet privacy objectives.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-P5.1",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Data Subject Access",
+    "text": "Authenticated data subjects can access and obtain copies of their stored personal information, with denial reasons provided if access is refused.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-P5.2",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Correction of Personal Information",
+    "text": "Corrections requested by data subjects are made and communicated to relevant third parties, with denial reasons provided if a request is refused.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-P6.1",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Disclosure with Consent",
+    "text": "Personal information is disclosed to third parties only with the data subject's prior explicit consent.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-P6.2",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Record of Authorized Disclosures",
+    "text": "A complete, accurate, timely record of authorized disclosures of personal information is maintained.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-P6.3",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Record of Unauthorized Disclosures",
+    "text": "A complete, accurate, timely record of detected or reported unauthorized disclosures, including breaches, is maintained.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-P6.4",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Vendor Privacy Commitments",
+    "text": "Privacy commitments are obtained from vendors with access to personal information, and their compliance is periodically assessed.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-P6.5",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Vendor Breach Notification",
+    "text": "Vendors commit to notifying the entity of actual or suspected unauthorized disclosures, feeding into incident-response procedures.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-P6.6",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Breach Notification to Affected Parties",
+    "text": "Affected data subjects, regulators, and others are notified of breaches and privacy incidents.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-P6.7",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Accounting of Disclosures",
+    "text": "Data subjects can request an accounting of the personal information held about them and its disclosures.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-P7.1",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Data Quality",
+    "text": "Personal information collected and maintained is accurate, up to date, complete, and relevant.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "SOC2-P8.1",
+    "sourceDoc": "AICPA SOC 2 Trust Services Criteria (2017, rev. 2022)",
+    "section": "Monitoring and Enforcement",
+    "text": "A process handles and resolves privacy inquiries, complaints, and disputes, with periodic compliance monitoring and timely corrective action.",
+    "framework": "SOC2"
+  },
+  {
+    "controlId": "A01:2025",
+    "sourceDoc": "OWASP Top 10:2025 (Web Application Security Risks), CC BY-SA 4.0",
+    "section": "Broken Access Control",
+    "text": "Failures that let users act outside their intended permissions, such as viewing or modifying other users' data or reaching administrative functions; Server-Side Request Forgery (SSRF) was folded into this category for 2025, and it remains the top-ranked risk.",
+    "framework": "OWASP_WEB"
+  },
+  {
+    "controlId": "A02:2025",
+    "sourceDoc": "OWASP Top 10:2025 (Web Application Security Risks), CC BY-SA 4.0",
+    "section": "Security Misconfiguration",
+    "text": "Insecure default settings, incomplete hardening, or exposed configuration details create exploitable weaknesses; this category rose from #5 to #2 as more application behavior is driven by configuration.",
+    "framework": "OWASP_WEB"
+  },
+  {
+    "controlId": "A03:2025",
+    "sourceDoc": "OWASP Top 10:2025 (Web Application Security Risks), CC BY-SA 4.0",
+    "section": "Software Supply Chain Failures",
+    "text": "An expansion of the former 'Vulnerable and Outdated Components' category to cover compromises anywhere across software dependencies, build systems, and distribution infrastructure, not just known-vulnerable libraries.",
+    "framework": "OWASP_WEB"
+  },
+  {
+    "controlId": "A04:2025",
+    "sourceDoc": "OWASP Top 10:2025 (Web Application Security Risks), CC BY-SA 4.0",
+    "section": "Cryptographic Failures",
+    "text": "Weak, missing, or misapplied cryptography protecting data in transit or at rest, often leading to exposure of sensitive information or system compromise.",
+    "framework": "OWASP_WEB"
+  },
+  {
+    "controlId": "A05:2025",
+    "sourceDoc": "OWASP Top 10:2025 (Web Application Security Risks), CC BY-SA 4.0",
+    "section": "Injection",
+    "text": "Untrusted input is interpreted as code or commands by an interpreter (SQL, OS command, cross-site scripting, etc.), spanning a wide range of frequency and impact.",
+    "framework": "OWASP_WEB"
+  },
+  {
+    "controlId": "A06:2025",
+    "sourceDoc": "OWASP Top 10:2025 (Web Application Security Risks), CC BY-SA 4.0",
+    "section": "Insecure Design",
+    "text": "Missing or ineffective security controls baked in at the design stage, distinct from implementation bugs; addressed through threat modeling and secure design practices.",
+    "framework": "OWASP_WEB"
+  },
+  {
+    "controlId": "A07:2025",
+    "sourceDoc": "OWASP Top 10:2025 (Web Application Security Risks), CC BY-SA 4.0",
+    "section": "Authentication Failures",
+    "text": "Weaknesses in verifying user identity, renamed from 'Identification and Authentication Failures,' covering issues like credential stuffing and weak session handling.",
+    "framework": "OWASP_WEB"
+  },
+  {
+    "controlId": "A08:2025",
+    "sourceDoc": "OWASP Top 10:2025 (Web Application Security Risks), CC BY-SA 4.0",
+    "section": "Software or Data Integrity Failures",
+    "text": "Failure to verify the integrity of software, code, and data artifacts (e.g., unsigned updates, insecure deserialization) at a level distinct from the broader supply chain.",
+    "framework": "OWASP_WEB"
+  },
+  {
+    "controlId": "A09:2025",
+    "sourceDoc": "OWASP Top 10:2025 (Web Application Security Risks), CC BY-SA 4.0",
+    "section": "Security Logging and Alerting Failures",
+    "text": "Insufficient logging, or more specifically insufficient alerting on logged events, that delays detection of and response to security incidents.",
+    "framework": "OWASP_WEB"
+  },
+  {
+    "controlId": "A10:2025",
+    "sourceDoc": "OWASP Top 10:2025 (Web Application Security Risks), CC BY-SA 4.0",
+    "section": "Mishandling of Exceptional Conditions",
+    "text": "A new 2025 category covering improper error handling, logic flaws, and fail-open behavior triggered by abnormal or unexpected conditions.",
+    "framework": "OWASP_WEB"
+  },
+  {
+    "controlId": "LLM01:2025",
+    "sourceDoc": "OWASP Top 10 for LLM Applications 2025 (v2.0), CC BY-SA 4.0",
+    "section": "Prompt Injection",
+    "text": "User-supplied or externally sourced input alters an LLM's intended behavior or output, whether through direct malicious prompts or indirect injection via documents, web pages, or other ingested content.",
+    "framework": "OWASP_LLM"
+  },
+  {
+    "controlId": "LLM02:2025",
+    "sourceDoc": "OWASP Top 10 for LLM Applications 2025 (v2.0), CC BY-SA 4.0",
+    "section": "Sensitive Information Disclosure",
+    "text": "LLM outputs can expose personal data, proprietary algorithms, or confidential business information absorbed during training or supplied in context, risking privacy and IP breaches.",
+    "framework": "OWASP_LLM"
+  },
+  {
+    "controlId": "LLM03:2025",
+    "sourceDoc": "OWASP Top 10 for LLM Applications 2025 (v2.0), CC BY-SA 4.0",
+    "section": "Supply Chain",
+    "text": "Risks introduced by third-party models, datasets, fine-tuning adapters such as LoRA, and collaborative model-sharing platforms that can carry tampering, backdoors, or licensing problems.",
+    "framework": "OWASP_LLM"
+  },
+  {
+    "controlId": "LLM04:2025",
+    "sourceDoc": "OWASP Top 10 for LLM Applications 2025 (v2.0), CC BY-SA 4.0",
+    "section": "Data and Model Poisoning",
+    "text": "Manipulation of pre-training, fine-tuning, or embedding data introduces backdoors, bias, or degraded performance, sometimes staying dormant until triggered later.",
+    "framework": "OWASP_LLM"
+  },
+  {
+    "controlId": "LLM05:2025",
+    "sourceDoc": "OWASP Top 10 for LLM Applications 2025 (v2.0), CC BY-SA 4.0",
+    "section": "Improper Output Handling",
+    "text": "Insufficient validation or sanitization of LLM-generated output before it is passed downstream, potentially enabling XSS, SQL injection, or remote code execution.",
+    "framework": "OWASP_LLM"
+  },
+  {
+    "controlId": "LLM06:2025",
+    "sourceDoc": "OWASP Top 10 for LLM Applications 2025 (v2.0), CC BY-SA 4.0",
+    "section": "Excessive Agency",
+    "text": "LLM-based agents granted more functionality, permissions, or autonomy than necessary, so a manipulated or malfunctioning model can trigger damaging real-world actions.",
+    "framework": "OWASP_LLM"
+  },
+  {
+    "controlId": "LLM07:2025",
+    "sourceDoc": "OWASP Top 10 for LLM Applications 2025 (v2.0), CC BY-SA 4.0",
+    "section": "System Prompt Leakage",
+    "text": "The real risk isn't that a system prompt was disclosed, but that sensitive data or security-relevant logic was embedded in the prompt instead of being enforced by independent, external controls.",
+    "framework": "OWASP_LLM"
+  },
+  {
+    "controlId": "LLM08:2025",
+    "sourceDoc": "OWASP Top 10 for LLM Applications 2025 (v2.0), CC BY-SA 4.0",
+    "section": "Vector and Embedding Weaknesses",
+    "text": "Weaknesses in how RAG systems generate, store, or retrieve embeddings can leak data across tenants, allow embedding-inversion attacks, or let attackers poison the knowledge base.",
+    "framework": "OWASP_LLM"
+  },
+  {
+    "controlId": "LLM09:2025",
+    "sourceDoc": "OWASP Top 10 for LLM Applications 2025 (v2.0), CC BY-SA 4.0",
+    "section": "Misinformation",
+    "text": "LLMs can produce confident but false or unsupported content, largely due to hallucination, and user overreliance on that output compounds the risk.",
+    "framework": "OWASP_LLM"
+  },
+  {
+    "controlId": "LLM10:2025",
+    "sourceDoc": "OWASP Top 10 for LLM Applications 2025 (v2.0), CC BY-SA 4.0",
+    "section": "Unbounded Consumption",
+    "text": "Uncontrolled or excessive inference requests can cause denial of service, runaway cloud costs ('denial of wallet'), or model theft through repeated querying and extraction techniques.",
+    "framework": "OWASP_LLM"
+  }
+]
