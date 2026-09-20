@@ -6,7 +6,7 @@ import { internal } from "./_generated/api";
 import { embedText, generateRemediation } from "./gemini";
 
 const FRAMEWORKS = ["OWASP_WEB", "OWASP_LLM", "SOC2", "ISO27001"];
-const PER_FRAMEWORK_K = 2; // top-k *within each framework*, not overall
+const PER_FRAMEWORK_K = 100; // top-k *within each framework*, not overall
 // Below this cosine similarity, we don't trust the match — surface "no
 // relevant control found" instead of letting the model force an answer.
 // This threshold is a starting guess; tune it against a real eval set
