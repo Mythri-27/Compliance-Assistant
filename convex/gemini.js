@@ -11,7 +11,7 @@
 // gemini-2.5-flash was sunset for new API keys.
 
 const EMBED_MODEL = "gemini-embedding-001";
-const GEN_MODEL = "gemini-3.6-flash";
+const GEN_MODEL = "gemini-3.5-flash-lite";
 const BASE = "https://generativelanguage.googleapis.com/v1beta";
 // gemini-embedding-001 defaults to 3072-dim vectors; scale down to 768 so it
 // matches the `dimensions: 768` set on the vector index in convex/schema.js.
