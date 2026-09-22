@@ -5,6 +5,8 @@ const { ConvexHttpClient } = require("convex/browser");
 const { anyApi } = require("convex/server");
 
 const PACING_MS = 13000;
+const RANK_N_VALUES = [1, 2, 3, 4, 5, 7, 10, 15, 20];
+
 const csvEscape = (v) => {
   const s = String(v ?? "");
   return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
@@ -12,6 +14,44 @@ const csvEscape = (v) => {
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const calcRate = (subset, total) => (total > 0 ? (subset.length / total) * 100 : null);
 const fmtPct = (val) => (val === null ? "n/a" : `${val.toFixed(0)}%`);
+
+// Framework is fully determined by the controlId's own shape — no lookup needed.
+function inferFramework(controlId) {
+  if (/^LLM\d{2}:2025$/.test(controlId)) return "OWASP_LLM";
+  if (/^A\d{2}:2025$/.test(controlId)) return "OWASP_WEB";
+  if (controlId.startsWith("SOC2-")) return "SOC2";
+  if (controlId.startsWith("ISO27001-")) return "ISO27001";
+  return "UNKNOWN";
+}
+
+// For each expected control, find where it ranks (1-based) within its OWN
+// framework's candidate list, sorted by score descending. controlScores
+// already covers ~the whole framework at threshold 0.4, so "not found" means
+// the control scored below 0.4 entirely (fell out of retrieval, not just
+// ranked low).
+function rankExpectedControls(expectedControlIds, controlScores) {
+  const byFramework = {};
+  for (const cs of controlScores) {
+    const fw = inferFramework(cs.controlId);
+    (byFramework[fw] ??= []).push(cs);
+  }
+  for (const fw in byFramework) {
+    byFramework[fw].sort((a, b) => b.score - a.score);
+  }
+
+  return expectedControlIds.map((controlId) => {
+    const fw = inferFramework(controlId);
+    const list = byFramework[fw] ?? [];
+    const idx = list.findIndex((cs) => cs.controlId === controlId);
+    return {
+      controlId,
+      framework: fw,
+      rank: idx === -1 ? null:idx, // null = fell below threshold entirely
+      totalInFramework: list.length,
+      found: idx !== -1,
+    };
+  });
+}
 
 async function main() {
   const url = process.env.NEXT_PUBLIC_CONVEX_URL;
@@ -25,6 +65,7 @@ async function main() {
 
   const client = new ConvexHttpClient(url);
   const rows = [];
+  const allRankRecords = []; // flat list across every finding, for the aggregate table
 
   for (let i = 0; i < evalSet.length; i++) {
     const { findingText, expectedControlIds } = evalSet[i];
@@ -52,6 +93,14 @@ async function main() {
       const scoreMax = scores.length ? Math.max(...scores) : null;
       const scoreAvg = scores.length ? scores.reduce((sum, s) => sum + s, 0) / scores.length : null;
 
+      // --- NEW: rank each expected control within its own framework ---
+      const rankRecords = rankExpectedControls(expectedControlIds, retrievedControlScores);
+      allRankRecords.push(...rankRecords);
+      const foundRanks = rankRecords.filter((r) => r.found).map((r) => r.rank + 1); // display as 1-based
+      const worstRank = rankRecords.some((r) => !r.found)
+        ? "below threshold" // at least one expected control didn't even clear 0.4
+        : (foundRanks.length ? Math.max(...foundRanks) : null);
+
       const row = {
         sNo: i + 1, findingText,
         expectedControlIds: expectedControlIds.join("; "),
@@ -65,6 +114,15 @@ async function main() {
         irrelevantRetrievedCount: retrievedControlScores.filter((cs) => !cs.relevant).length,
         retrievedControlScores: JSON.stringify(retrievedControlScores),
         scoreMin, scoreMax, scoreAvg, error: null,
+        expectedControlRanks: JSON.stringify(
+          rankRecords.map((r) => ({
+            controlId: r.controlId,
+            framework: r.framework,
+            rank: r.found ? r.rank + 1 : null, // 1-based, or null if below threshold
+            totalInFramework: r.totalInFramework,
+          }))
+        ),
+        worstRankInFramework: worstRank,
       };
       rows.push(row);
 
@@ -72,7 +130,8 @@ async function main() {
       const rStr = contextRecall === null ? "n/a" : `${(contextRecall * 100).toFixed(0)}%`;
       console.log(`${i + 1}/${evalSet.length} — retrieval ${retrievalHit ? "✅" : "❌"}  recall ${rStr}  precision ${pStr}  citation ${citationHit ? "✅" : "❌"}  ${result.verified ? "verified" : "⚠️ invalid citation"}`);
       console.log(`    retrieved: ${row.retrievedCount} | relevant: ${row.relevantRetrievedCount} | irrelevant: ${row.irrelevantRetrievedCount} | score range: ${scoreMin === null ? "n/a" : `${scoreMin.toFixed(2)} -${scoreMax.toFixed(2)}`}`);
-    } 
+      console.log(`    ranks (within own framework): ${rankRecords.map((r) => `${r.controlId}=${r.found ? `#${r.rank + 1}` : "BELOW-THRESHOLD"}`).join(", ")}`);
+    }
     catch (err) {
       rows.push({
         sNo: i + 1, findingText, expectedControlIds: expectedControlIds.join("; "),
@@ -80,6 +139,7 @@ async function main() {
         missedExpected: "", invalidCitations: "", verified: false, lowConfidence: false,
         retrievedCount: 0, relevantRetrievedCount: 0, irrelevantRetrievedCount: 0,
         retrievedControlScores: "", scoreMin: null, scoreMax: null, scoreAvg: null,
+        expectedControlRanks: "", worstRankInFramework: null,
         error: err.message ?? String(err),
       });
       console.log(`${i + 1}/${evalSet.length} — ❌ ERROR: ${err.message ?? err}`);
@@ -88,7 +148,7 @@ async function main() {
     if (i < evalSet.length - 1) await sleep(PACING_MS);
   }
 
-  // Aggregate metrics
+  // Aggregate metrics (unchanged from before)
   const okRows = rows.filter((r) => r.error === null);
   const nOk = okRows.length;
   const precRows = okRows.filter((r) => r.contextPrecision !== null);
@@ -110,8 +170,24 @@ async function main() {
   console.log(`Citation validity rate:  ${citationValidityRate === null ? "n/a" : `${citationValidityRate.toFixed(1)}% (${okRows.filter((r) => r.verified).length}/${nOk})`}`);
   console.log(`Low-confidence rate:     ${lowConfidenceRate === null ? "n/a" : `${lowConfidenceRate.toFixed(1)}% (${okRows.filter((r) => r.lowConfidence).length}/${nOk})`}`);
 
-  // Write CSV
-  const headers = ["S.No.", "Finding", "Expected Controls", "Cited Controls", "Retrieval Hit", "Context Recall", "Context Precision", "Citation Hit", "Missed Expected", "Invalid Citations", "Verified", "Low Confidence", "Retrieved Count", "Relevant Retrieved Count", "Irrelevant Retrieved Count", "Retrieved Control Scores", "Score Min", "Score Max", "Score Average", "Error"];
+  // --- NEW: rank-based recall table — "if we only kept top-N per framework
+  // instead of score-thresholding, what fraction of expected controls would
+  // we still have?" ---
+  console.log("\n--- Recall@N-per-framework (would replacing the threshold with a fixed top-N cutoff work?) ---");
+  const totalExpected = allRankRecords.length;
+  const belowThreshold = allRankRecords.filter((r) => !r.found).length;
+  console.log(`Total expected-control instances across eval set: ${totalExpected} (${belowThreshold} never cleared the 0.4 threshold at all — no N can recover those)\n`);
+  console.log("N".padEnd(6) + "Recall@N".padEnd(12) + "Caught/Total");
+  console.log("-".repeat(30));
+  const rankTableRows = RANK_N_VALUES.map((n) => {
+    const caught = allRankRecords.filter((r) => r.found && r.rank < n).length; // r.rank is 0-based
+    const recallAtN = totalExpected ? (caught / totalExpected) * 100 : 0;
+    console.log(`${String(n).padEnd(6)}${`${recallAtN.toFixed(1)}%`.padEnd(12)}${caught}/${totalExpected}`);
+    return { n, recallAtN, caught, total: totalExpected };
+  });
+
+  // Write CSVs
+  const headers = ["S.No.", "Finding", "Expected Controls", "Cited Controls", "Retrieval Hit", "Context Recall", "Context Precision", "Citation Hit", "Missed Expected", "Invalid Citations", "Verified", "Low Confidence", "Retrieved Count", "Relevant Retrieved Count", "Irrelevant Retrieved Count", "Retrieved Control Scores", "Score Min", "Score Max", "Score Average", "Expected Control Ranks", "Worst Rank In Framework", "Error"];
   const csvData = [
     headers,
     ...rows.map((r) => [
@@ -120,13 +196,22 @@ async function main() {
       fmtPct(r.contextPrecision !== null ? r.contextPrecision * 100 : null),
       r.citationHit, r.missedExpected, r.invalidCitations, r.verified, r.lowConfidence,
       r.retrievedCount, r.relevantRetrievedCount, r.irrelevantRetrievedCount,
-      r.retrievedControlScores, r.scoreMin, r.scoreMax, r.scoreAvg, r.error ?? "",
+      r.retrievedControlScores, r.scoreMin, r.scoreMax, r.scoreAvg,
+      r.expectedControlRanks, r.worstRankInFramework, r.error ?? "",
     ]),
   ];
 
   const outPath = path.join(__dirname, "..", "eval-report.csv");
   fs.writeFileSync(outPath, csvData.map((row) => row.map(csvEscape).join(",")).join("\n"));
   console.log(`\nFull report written to ${outPath}`);
+
+  const rankOutPath = path.join(__dirname, "..", "rank-analysis.csv");
+  const rankCsv = [
+    "N,RecallAtN,Caught,Total",
+    ...rankTableRows.map((r) => `${r.n},${r.recallAtN.toFixed(2)},${r.caught},${r.total}`),
+  ].join("\n");
+  fs.writeFileSync(rankOutPath, rankCsv);
+  console.log(`Rank analysis written to ${rankOutPath}`);
 }
 
 main().catch((err) => {

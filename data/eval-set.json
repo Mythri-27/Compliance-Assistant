@@ -1,11 +1,11 @@
 [
   {
     "findingText": "Login endpoint concatenates user input directly into SQL query, allowing injection.",
-    "expectedControlIds": ["A03:2025", "ISO27001-A.8.28"]
+    "expectedControlIds": ["A05:2025", "ISO27001-A.8.28"]
   },
   {
     "findingText": "Session cookies are transmitted over unencrypted HTTP.",
-    "expectedControlIds": ["A02:2025", "SOC2-CC6.7", "ISO27001-A.8.24"]
+    "expectedControlIds": ["A04:2025", "SOC2-CC6.7", "ISO27001-A.8.24"]
   },
   {
     "findingText": "Admin dashboard has no authentication required.",
@@ -17,7 +17,7 @@
   },
   {
     "findingText": "An internal AI agent has been granted unrestricted read/write access to the entire corporate database cluster rather than a restricted, read-only data view, creating an unnecessary exposure vector.",
-    "expectedControlIds": ["LLM03:2025", "ISO27001-A.8.2", "SOC2-CC6.3"]
+    "expectedControlIds": ["LLM06:2025", "ISO27001-A.8.2", "SOC2-CC6.3"]
   },
   {
     "findingText": "The internal document summaries pipeline processes multi-tenant uploads using a model that caches embedding parameters across sessions, exposing one customer's hidden context parameters to another user's search query.",
@@ -25,11 +25,11 @@
   },
   {
     "findingText": "The generative AI coding assistant platform passes LLM-generated SQL statements directly to the backend execution engine without schema validations or structure checks.",
-    "expectedControlIds": ["LLM10:2025", "A05:2025", "ISO27001-A.8.28"]
+    "expectedControlIds": ["LLM05:2025", "A05:2025", "ISO27001-A.8.28"]
   },
   {
     "findingText": "The internal retrieval-augmented generation (RAG) system lacks rate-limiting mechanisms on its token generation endpoint, leaving it vulnerable to a denial-of-service attack via resource exhaustion.",
-    "expectedControlIds": ["LLM06:2025", "ISO27001-A.8.20", "SOC2-CC7.1"]
+    "expectedControlIds": ["LLM10:2025", "ISO27001-A.8.20", "SOC2-CC7.1"]
   },
   {
     "findingText": "The core application frontend fails to sanitize or restrict target parameters inside deep-link redirect URLs, enabling unauthenticated threat actors to forge valid application redirect headers.",
@@ -41,7 +41,7 @@
   },
   {
     "findingText": "The user password reset workflow utilizes an obsolete, weak pseudo-random number generator (PRNG) to produce temporary verification tokens, allowing attackers to predict active recovery parameters.",
-    "expectedControlIds": ["A04:2025", "ISO27001-A.8.24", "SOC2-CC6.7"]
+    "expectedControlIds": ["A04:2025", "ISO27001-A.8.24", "SOC2-CC6.7"] 
   },
   {
     "findingText": "The system architecture lacks automated mechanisms to safely catch or strip low-level memory error logs from server responses, exposing structural stack details to public API requests.",
@@ -49,11 +49,11 @@
   },
   {
     "findingText": "The microservice platform logs authorization and authentication lifecycle operations without timestamp synchronizations or direct replication to an immutable storage area.",
-    "expectedControlIds": ["A09:2025", "ISO27001-A.8.16", "SOC2-CC7.2"]
+    "expectedControlIds": ["A09:2025", "ISO27001-A.8.17", "SOC2-CC7.2"]
   },
   {
     "findingText": "The engineering team maintains automated backups of proprietary algorithmic code bases on public cloud volumes without access logging controls or data classification labels.",
-    "expectedControlIds": ["ISO27001-A.5.12", "ISO27001-A.8.14", "SOC2-CC6.1"]
+    "expectedControlIds": ["ISO27001-A.5.13", "ISO27001-A.8.14", "SOC2-CC6.1"]
   },
   {
     "findingText": "The primary identity provider relies on a configuration where user access sessions remain valid for 30 consecutive days without forcing re-authentication or device-compliance validation.",
@@ -61,7 +61,7 @@
   },
   {
     "findingText": "The vendor risk assessment matrix evaluates third-party platform security postures exactly once at contract signing, omitting active performance checks or SLA reviews for systemic cloud vendors.",
-    "expectedControlIds": ["ISO27001-A.5.19", "SOC2-CC9.2"]
+    "expectedControlIds": ["ISO27001-A.5.22", "SOC2-CC9.2"]
   },
   {
     "findingText": "An internal data ingestion pipeline dynamically pulls model checkpoint fine-tuning weights from public cloud shares without running structural authenticity or data poisoning validations.",
