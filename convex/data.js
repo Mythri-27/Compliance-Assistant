@@ -74,6 +74,7 @@ export const saveAnalysis = internalMutation({
     citedControls: v.array(v.string()),
     invalidCitations: v.array(v.string()),
     verified: v.boolean(),
+    rerankedControlIds: v.optional(v.array(v.string())),
   },
   handler: async (ctx, args) => {
     return await ctx.db.insert("analyses", { ...args, createdAt: Date.now() });
