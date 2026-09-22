@@ -68,6 +68,8 @@ ${controlsBlock}
 Instructions:
 - If none of the retrieved controls are actually relevant to this finding, say so explicitly in "remediation" and return an empty cited_controls array. Do not force a match.
 - Otherwise, write a concise, actionable remediation grounded ONLY in the controls above.
+- The retrieved controls may span multiple frameworks (OWASP Web, OWASP LLM, SOC 2, ISO 27001). A single finding often maps to a genuinely relevant control in MORE THAN ONE framework at once — for example, an authentication weakness can simultaneously violate an OWASP access-control category, a SOC 2 logical-access criterion, AND an ISO 27001 access-control clause. Do NOT stop after finding one good match. Before finalizing your answer, check EACH framework represented in the retrieved controls above and ask: "is there a clearly relevant control from this framework too?" If yes, cite it as well, even if you already have a strong citation from a different framework.
+- Do not cite a control just to cover a framework, though — only cite ones that are genuinely and specifically relevant to this finding, per framework.
 - Every control you reference must appear in "cited_controls" using its exact ID as shown above (e.g. "SOC2-CC6.1").
 - Respond with ONLY a JSON object, no markdown fences, no preamble, in this exact shape:
 {"remediation": "...", "cited_controls": ["..."]}`;
@@ -83,7 +85,7 @@ Instructions:
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: { responseMimeType: "application/json" },
+        generationConfig: { responseMimeType: "application/json", temperature:0 },
       }),
     });
 
