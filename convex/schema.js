@@ -11,6 +11,7 @@ export default defineSchema({
     section: v.string(), // e.g. "Logical Access Controls"
     text: v.string(), // the actual control text, chunked
     embedding: v.array(v.float64()),
+
   })
     .index("by_controlId", ["controlId"])
     .vectorIndex("by_embedding", {
@@ -31,5 +32,6 @@ export default defineSchema({
     invalidCitations: v.array(v.string()), // cited IDs that failed corpus lookup
     verified: v.boolean(), // true iff invalidCitations is empty
     createdAt: v.number(),
+    rerankedControlIds: v.optional(v.array(v.string())),
   }),
 });
