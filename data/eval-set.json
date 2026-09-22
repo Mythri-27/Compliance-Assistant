@@ -21,7 +21,7 @@
   },
   {
     "findingText": "The internal document summaries pipeline processes multi-tenant uploads using a model that caches embedding parameters across sessions, exposing one customer's hidden context parameters to another user's search query.",
-    "expectedControlIds": ["LLM08:2025", "A01:2025", "ISO27001-A.8.24", "SOC2-CC6.5"]
+    "expectedControlIds": ["LLM08:2025", "A01:2025", "ISO27001-A.8.3", "SOC2-CC6.5"]
   },
   {
     "findingText": "The generative AI coding assistant platform passes LLM-generated SQL statements directly to the backend execution engine without schema validations or structure checks.",
@@ -53,7 +53,7 @@
   },
   {
     "findingText": "The engineering team maintains automated backups of proprietary algorithmic code bases on public cloud volumes without access logging controls or data classification labels.",
-    "expectedControlIds": ["ISO27001-A.5.13", "ISO27001-A.8.14", "SOC2-CC6.1"]
+    "expectedControlIds": ["ISO27001-A.5.12","ISO27001-A.5.13", "ISO27001-A.8.15", "SOC2-CC6.1"]
   },
   {
     "findingText": "The primary identity provider relies on a configuration where user access sessions remain valid for 30 consecutive days without forcing re-authentication or device-compliance validation.",
@@ -65,6 +65,6 @@
   },
   {
     "findingText": "An internal data ingestion pipeline dynamically pulls model checkpoint fine-tuning weights from public cloud shares without running structural authenticity or data poisoning validations.",
-    "expectedControlIds": ["LLM04:2025", "A08:2025", "ISO27001-A.8.30", "SOC2-CC8.1"]
+    "expectedControlIds": ["LLM03:2025","LLM04:2025", "A08:2025", "ISO27001-A.5.21", "SOC2-CC8.1"]
   }
 ]
