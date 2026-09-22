@@ -15,7 +15,7 @@ const GEN_MODEL = "gemini-3.5-flash-lite";
 const BASE = "https://generativelanguage.googleapis.com/v1beta";
 // gemini-embedding-001 defaults to 3072-dim vectors; scale down to 768 so it
 // matches the `dimensions: 768` set on the vector index in convex/schema.js.
-const EMBED_DIMENSIONS = 768;
+const EMBED_DIMENSIONS = 768; 
 
 function apiKey() {
   const key = process.env.GEMINI_API_KEY;
@@ -57,7 +57,7 @@ export async function generateRemediation(findingText, retrievedControls) {
     .map((c) => `[${c.controlId}] (${c.sourceDoc})\n${c.text}`)
     .join("\n\n");
 
-  const prompt = `You are a security compliance assistant. A vulnerability finding is given below, along with the only compliance controls you are allowed to reference.
+    const prompt = `You are a security compliance assistant. A vulnerability finding is given below, along with the only compliance controls you are allowed to reference.
 
 FINDING:
 ${findingText}
@@ -66,13 +66,14 @@ RETRIEVED CONTROLS (only cite from these — do not invent or reference any cont
 ${controlsBlock}
 
 Instructions:
-- If none of the retrieved controls are actually relevant to this finding, say so explicitly in "remediation" and return an empty cited_controls array. Do not force a match.
-- Otherwise, write a concise, actionable remediation grounded ONLY in the controls above.
-- The retrieved controls may span multiple frameworks (OWASP Web, OWASP LLM, SOC 2, ISO 27001). A single finding often maps to a genuinely relevant control in MORE THAN ONE framework at once — for example, an authentication weakness can simultaneously violate an OWASP access-control category, a SOC 2 logical-access criterion, AND an ISO 27001 access-control clause. Do NOT stop after finding one good match. Before finalizing your answer, check EACH framework represented in the retrieved controls above and ask: "is there a clearly relevant control from this framework too?" If yes, cite it as well, even if you already have a strong citation from a different framework.
-- Do not cite a control just to cover a framework, though — only cite ones that are genuinely and specifically relevant to this finding, per framework.
-- Every control you reference must appear in "cited_controls" using its exact ID as shown above (e.g. "SOC2-CC6.1").
+- First, from the RETRIEVED CONTROLS list, identify every control that is genuinely, specifically relevant to this finding (not just topically adjacent) — this may be more controls than you end up citing in the remediation, since it's about relevance, not about what makes the final written remediation. Order this list from most to least relevant.
+- If none are relevant, return an empty array for both.
+- Then write a concise, actionable remediation grounded ONLY in the controls above.
+- The retrieved controls may span multiple frameworks (OWASP Web, OWASP LLM, SOC 2, ISO 27001). A single finding often maps to a genuinely relevant control in MORE THAN ONE framework at once — check each framework represented and cite the best relevant control from each, don't stop after one.
+- Do not cite a control just to cover a framework — only cite ones genuinely and specifically relevant.
+- Every control in "cited_controls" must also appear in "relevant_controls", using its exact ID as shown above (e.g. "SOC2-CC6.1").
 - Respond with ONLY a JSON object, no markdown fences, no preamble, in this exact shape:
-{"remediation": "...", "cited_controls": ["..."]}`;
+{"relevant_controls": ["..."], "remediation": "...", "cited_controls": ["..."]}`;
 
   // gemini-3.6-flash has a known, ongoing elevated 503 (high-demand) rate on
   // generateContent as of this writing — retry with backoff instead of
@@ -97,10 +98,10 @@ Instructions:
         const parsed = JSON.parse(cleaned);
         return {
           remediation: parsed.remediation ?? "",
-          cited_controls: Array.isArray(parsed.cited_controls) ? parsed.cited_controls : [],
+          cited_controls: Array.isArray(parsed.cited_controls) ? parsed.cited_controls : [],relevant_controls: Array.isArray(parsed.relevant_controls) ? parsed.relevant_controls : [],
         };
       } catch {
-        return { remediation: raw, cited_controls: [] };
+        return { remediation: raw, cited_controls: [], relevant_controls: [] };
       }
     }
 
