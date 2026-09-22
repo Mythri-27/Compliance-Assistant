@@ -125,6 +125,7 @@ export const analyzeFinding = action({
     const result = {
       findingText,
       retrievedControlIds: matchedControls.map((c) => c.controlId),
+      rerankedControlIds: generated.relevant_controls,
       controlScores,
       topScore,
       lowConfidence: false,
