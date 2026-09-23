@@ -113,6 +113,7 @@ async function main() {
         sNo: i + 1, findingText,
         expectedControlIds: expectedControlIds.join("; "),
         citedControls: result.citedControls.join("; "),
+        remediation: result.remediation,
         rerankedControlIds: rerankedIds.join("; "),
         retrievalHit, contextRecall, contextPrecision, citationHit,
         rerankedRecall, rerankedPrecision,
@@ -148,7 +149,7 @@ async function main() {
     catch (err) {
       rows.push({
         sNo: i + 1, findingText, expectedControlIds: expectedControlIds.join("; "),
-        citedControls: "", rerankedControlIds: "",
+        citedControls: "", remediation: "", rerankedControlIds: "",
         retrievalHit: false, contextRecall: null, contextPrecision: null, citationHit: false,
         rerankedRecall: null, rerankedPrecision: null,
         missedExpected: "", invalidCitations: "", verified: false, lowConfidence: false,
@@ -208,11 +209,11 @@ async function main() {
   });
 
   // Write CSVs
-  const headers = ["S.No.", "Finding", "Expected Controls", "Cited Controls", "Reranked Controls", "Retrieval Hit", "Context Recall", "Context Precision", "Reranked Recall", "Reranked Precision", "Citation Hit", "Missed Expected", "Invalid Citations", "Verified", "Low Confidence", "Retrieved Count", "Relevant Retrieved Count", "Irrelevant Retrieved Count", "Retrieved Control Scores", "Score Min", "Score Max", "Score Average", "Expected Control Ranks", "Worst Rank In Framework", "Error"];
+  const headers = ["S.No.", "Finding", "Expected Controls", "Cited Controls","Remediation", "Reranked Controls", "Retrieval Hit", "Context Recall", "Context Precision", "Reranked Recall", "Reranked Precision", "Citation Hit", "Missed Expected", "Invalid Citations", "Verified", "Low Confidence", "Retrieved Count", "Relevant Retrieved Count", "Irrelevant Retrieved Count", "Retrieved Control Scores", "Score Min", "Score Max", "Score Average", "Expected Control Ranks", "Worst Rank In Framework", "Error"];
   const csvData = [
     headers,
     ...rows.map((r) => [
-      r.sNo, r.findingText, r.expectedControlIds, r.citedControls, r.rerankedControlIds, r.retrievalHit,
+      r.sNo, r.findingText, r.expectedControlIds, r.citedControls, r.remediation, r.rerankedControlIds, r.retrievalHit,
       fmtPct(r.contextRecall !== null ? r.contextRecall * 100 : null),
       fmtPct(r.contextPrecision !== null ? r.contextPrecision * 100 : null),
       fmtPct(r.rerankedRecall !== null ? r.rerankedRecall * 100 : null),
