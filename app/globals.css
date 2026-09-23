@@ -1,35 +1,350 @@
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  max-width: 760px;
-  margin: 40px auto;
-  padding: 0 16px;
-  color: #1a1a1a;
+/* ---------------------------------------------------------------------
+   Design tokens
+   Subject: an internal security-compliance triage tool. Treated like an
+   audit report, not a marketing page — dense data, chip-coded controls,
+   a status system instead of colored prose.
+--------------------------------------------------------------------- */
+:root {
+  --bg: #10131a;
+  --surface: #171c26;
+  --surface-raised: #1d2330;
+  --border: #2a3040;
+  --border-soft: #232939;
+  --text: #e6e9f0;
+  --text-dim: #8891a3;
+  --text-faint: #5b6376;
+  --accent: #5b8def;
+  --accent-dim: #3a5a99;
+
+  --verified: #34d399;
+  --verified-bg: rgba(52, 211, 153, 0.12);
+  --unverified: #f2b84b;
+  --unverified-bg: rgba(242, 184, 75, 0.14);
+  --nomatch: #8891a3;
+  --nomatch-bg: rgba(136, 145, 163, 0.14);
+  --error: #f0645f;
+  --error-bg: rgba(240, 100, 95, 0.14);
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "Roboto Mono", Menlo, Consolas, monospace;
+
+  --radius: 5px;
 }
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------------------------------------------------------------------
+   Layout
+--------------------------------------------------------------------- */
+main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0 0 6px;
+}
+
+main > p {
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  max-width: 62ch;
+  margin: 0 0 28px;
+}
+
+/* ---------------------------------------------------------------------
+   Input
+--------------------------------------------------------------------- */
 textarea {
   width: 100%;
-  min-height: 140px;
-  padding: 10px;
-  font-family: inherit;
-  font-size: 14px;
+  min-height: 150px;
+  padding: 14px 16px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  resize: vertical;
 }
+
+textarea::placeholder {
+  color: var(--text-faint);
+}
+
+textarea:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+  border-color: var(--accent);
+}
+
 button {
-  padding: 8px 16px;
-  margin-top: 10px;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 650;
+  padding: 9px 10px;
+  margin-top: 12px;
+  color: var(--bg);
+  background: var(--accent);
+  border: none;
+  border-radius: var(--radius);
   cursor: pointer;
+  transition: background 0.15s ease;
 }
+
+button:hover:not(:disabled) {
+  background: #6f9bf2;
+}
+
+button:disabled {
+  background: var(--surface-raised);
+  color: var(--text-faint);
+  cursor: default;
+}
+
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
 .control {
-  border: 1px solid #ddd;
-  border-radius: 6px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
   padding: 10px 14px;
   margin: 8px 0;
 }
-.invalid {
-  color: #b00020;
-  font-weight: 600;
-}
+
 .warning {
-  background: #fff8e1;
-  border: 1px solid #f0d060;
+  display: inline-block;
+  color: var(--unverified);
+  background: var(--unverified-bg);
+  border: 1px solid rgba(242, 184, 75, 0.3);
   padding: 8px 12px;
-  border-radius: 6px;
+  border-radius: var(--radius);
+  font-size: 0.85rem;
+  margin-top: 14px;
+}
+
+/* ---------------------------------------------------------------------
+   Results
+--------------------------------------------------------------------- */
+section h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  margin: 40px 0 14px;
+}
+
+.table-scroll {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.results-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  min-width: 760px;
+}
+
+.results-table thead th {
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  background: var(--surface-raised);
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.results-table tbody td {
+  padding: 10px 12px;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.results-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.results-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.015);
+}
+
+.col-num {
+  font-family: var(--font-mono);
+  color: var(--text-faint);
+  width: 32px;
+}
+
+.col-finding {
+  max-width: 240px;
+  color: var(--text);
+}
+
+.col-controls {
+  min-width: 150px;
+}
+
+.col-remediation {
+  max-width: 320px;
+  color: var(--text-dim);
+}
+
+.remediation-text {
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.remediation-text.expanded {
+  -webkit-line-clamp: unset;
+  overflow: visible;
+}
+
+.row-toggle {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 0;
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.row-toggle:hover {
+  background: none;
+  text-decoration: underline;
+}
+
+.row-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.cell-empty {
+  color: var(--text-faint);
+}
+
+/* ---------------------------------------------------------------------
+   Control chips
+--------------------------------------------------------------------- */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  padding: 2px 7px;
+  border-radius: 4px;
+  margin: 0 4px 4px 0;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.chip-cited {
+  color: var(--verified);
+  background: var(--verified-bg);
+  border-color: rgba(52, 211, 153, 0.25);
+}
+
+.chip-invalid {
+  color: var(--error);
+  background: var(--error-bg);
+  border-color: rgba(240, 100, 95, 0.3);
+}
+
+.chip-relevant {
+  color: var(--text-dim);
+  background: transparent;
+  border-color: var(--border);
+}
+
+.chip-score {
+  color: inherit;
+  opacity: 0.7;
+}
+
+.chip-flag {
+  font-size: 0.7rem;
+}
+
+/* ---------------------------------------------------------------------
+   Status pill
+--------------------------------------------------------------------- */
+.status-pill {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 500;
+  padding: 3px 9px;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+
+.status-verified {
+  color: var(--verified);
+  background: var(--verified-bg);
+}
+
+.status-unverified {
+  color: var(--unverified);
+  background: var(--unverified-bg);
+}
+
+.status-nomatch,
+.status-low {
+  color: var(--nomatch);
+  background: var(--nomatch-bg);
+}
+
+.status-error {
+  color: var(--error);
+  background: var(--error-bg);
+}
+
+/* ---------------------------------------------------------------------
+   Export
+--------------------------------------------------------------------- */
+.export-btn {
+  margin-top: 18px;
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.export-btn:hover:not(:disabled) {
+  background: var(--surface-raised);
+  border-color: var(--text-faint);
+}
+
+/* ---------------------------------------------------------------------
+   Responsive
+--------------------------------------------------------------------- */
+@media (max-width: 640px) {
+  main {
+    padding: 28px 16px 60px;
+  }
 }

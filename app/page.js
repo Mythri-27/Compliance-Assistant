@@ -10,6 +10,10 @@ import { api } from "../convex/_generated/api";
 // silently truncating or hanging.
 const MAX_FINDINGS_PER_BATCH = 50;
 
+// Below this length a remediation reads as one short paragraph anyway —
+// no point offering a "Show more" toggle for a sentence that isn't clamped.
+const REMEDIATION_PREVIEW_CHARS = 160;
+
 function statusFor(r) {
   if (r.lowConfidence) return "Low confidence";
   if (r.citedControls.length === 0) return "No relevant match";
@@ -17,11 +21,46 @@ function statusFor(r) {
   return "Verified";
 }
 
+function statusClass(r) {
+  if (r.error) return "status-error";
+  if (r.lowConfidence) return "status-low";
+  if (r.citedControls.length === 0) return "status-nomatch";
+  if (!r.verified) return "status-unverified";
+  return "status-verified";
+}
+
 // A cited control's score comes from controlScores (the retrieval candidate
 // list) — invalid citations (hallucinated IDs) won't have one, hence the
 // fallback.
 function scoreFor(r, controlId) {
   return r.controlScores.find((cs) => cs.controlId === controlId)?.score;
+}
+
+// The reranked list (rerankedControlIds) is the model's relevance-filtered
+// superset of what it ended up citing. Showing the whole list next to the
+// cited one would mostly repeat itself — the actually new signal is what the
+// model flagged as relevant but didn't cite in the final remediation.
+function alsoRelevantFor(r) {
+  const reranked = r.rerankedControlIds ?? [];
+  return reranked.filter((id) => !r.citedControls.includes(id));
+}
+
+// Convex action failures often surface as a multi-line message with a raw
+// server stack trace attached — never something to show a user directly.
+// Keep only the first clean line, strip any leaked file:line reference or
+// trailing "at ..." frame, and fall back to a generic message if nothing
+// usable survives.
+function friendlyErrorMessage(err) {
+  const raw = err?.message ?? String(err);
+  const firstLine = raw.split("\n")[0].trim();
+  const cleaned = firstLine
+    .replace(/\s+at\s.+$/, "")
+    .replace(/\([^)]*:\d+:\d+\)/, "")
+    .trim();
+  if (!cleaned || /^(uncaught\s+)?(error|typeerror|referenceerror)\s*:?\s*$/i.test(cleaned)) {
+    return "Something went wrong analyzing this finding. Try again.";
+  }
+  return cleaned.length > 160 ? `${cleaned.slice(0, 160)}…` : cleaned;
 }
 
 function csvEscape(value) {
@@ -46,8 +85,18 @@ export default function Home() {
   const [processing, setProcessing] = useState(false);
   const [progress, setProgress] = useState({ done: 0, total: 0 });
   const [inputWarning, setInputWarning] = useState("");
+  const [expandedRows, setExpandedRows] = useState(() => new Set());
 
   const analyzeFinding = useAction(api.analyze.analyzeFinding);
+
+  function toggleRow(sNo) {
+    setExpandedRows((prev) => {
+      const next = new Set(prev);
+      if (next.has(sNo)) next.delete(sNo);
+      else next.add(sNo);
+      return next;
+    });
+  }
 
   async function handleAnalyzeAll() {
     const rawLines = inputText.split("\n").map((l) => l.trim());
@@ -71,6 +120,7 @@ export default function Home() {
     }
 
     setResults([]);
+    setExpandedRows(new Set()); // sNo restarts at 1 each run — don't carry over stale expand state
     setProcessing(true);
     setProgress({ done: 0, total: toProcess.length });
 
@@ -84,12 +134,15 @@ export default function Home() {
         const result = await analyzeFinding({ findingText });
         setResults((prev) => [...prev, { sNo: i + 1, findingText, ...result }]);
       } catch (err) {
+        // Full error stays in the console for debugging; the UI only ever
+        // shows a sanitized, user-facing message (see friendlyErrorMessage).
+        console.error(`Analysis failed for finding ${i + 1}:`, err);
         setResults((prev) => [
           ...prev,
           {
             sNo: i + 1,
             findingText,
-            error: err.message ?? String(err),
+            error: friendlyErrorMessage(err),
             lowConfidence: false,
             verified: false,
             retrievedControlIds: [],
@@ -97,6 +150,7 @@ export default function Home() {
             remediation: "",
             citedControls: [],
             invalidCitations: [],
+            rerankedControlIds: [],
           },
         ]);
       }
@@ -109,12 +163,21 @@ export default function Home() {
   function handleExportCsv() {
     if (results.length === 0) return;
     const rows = [
-      ["S.No.", "Finding", "Matched Controls", "Confidence", "Status", "Remediation"],
+      [
+        "S.No.",
+        "Finding",
+        "Matched Controls",
+        "Confidence",
+        "Also Relevant Controls",
+        "Status",
+        "Remediation",
+      ],
       ...results.map((r) => [
         r.sNo,
         r.findingText,
         r.citedControls.join("\n"),
         r.citedControls.map((id) => scoreFor(r, id)?.toFixed(2) ?? "—").join("\n"),
+        alsoRelevantFor(r).join("\n"),
         r.error ? `Error: ${r.error}` : statusFor(r),
         r.remediation,
       ]),
@@ -145,58 +208,101 @@ export default function Home() {
       {inputWarning && <p className="warning">⚠️ {inputWarning}</p>}
 
       {results.length > 0 && (
-        <section style={{ marginTop: 30 }}>
+        <section>
           <h2>Results</h2>
-          <table style={{ width: "100%", borderCollapse: "collapse" }}>
-            <thead>
-              <tr>
-                <th style={{ textAlign: "left", borderBottom: "1px solid #ddd", padding: 6 }}>S.No.</th>
-                <th style={{ textAlign: "left", borderBottom: "1px solid #ddd", padding: 6 }}>Finding</th>
-                <th style={{ textAlign: "left", borderBottom: "1px solid #ddd", padding: 6 }}>Matched Controls</th>
-                <th style={{ textAlign: "left", borderBottom: "1px solid #ddd", padding: 6 }}>Confidence</th>
-                <th style={{ textAlign: "left", borderBottom: "1px solid #ddd", padding: 6 }}>Status</th>
-                <th style={{ textAlign: "left", borderBottom: "1px solid #ddd", padding: 6 }}>Remediation</th>
-              </tr>
-            </thead>
-            <tbody>
-              {results.map((r) => (
-                <tr key={r.sNo}>
-                  <td style={{ verticalAlign: "top", padding: 6, borderBottom: "1px solid #eee" }}>{r.sNo}</td>
-                  <td style={{ verticalAlign: "top", padding: 6, borderBottom: "1px solid #eee", maxWidth: 220 }}>
-                    {r.findingText}
-                  </td>
-                  <td style={{ verticalAlign: "top", padding: 6, borderBottom: "1px solid #eee", whiteSpace: "nowrap" }}>
-                    {r.citedControls.length === 0
-                      ? "—"
-                      : r.citedControls.map((id) => (
-                          <div key={id} className={r.invalidCitations.includes(id) ? "invalid" : ""}>
-                            {id}
-                            {r.invalidCitations.includes(id) && " ⚠️"}
-                          </div>
-                        ))}
-                  </td>
-                  <td style={{ verticalAlign: "top", padding: 6, borderBottom: "1px solid #eee" }}>
-                    {r.citedControls.length === 0
-                      ? "—"
-                      : r.citedControls.map((id) => (
-                          <div key={id}>{scoreFor(r, id)?.toFixed(2) ?? "—"}</div>
-                        ))}
-                  </td>
-                  <td
-                    style={{ verticalAlign: "top", padding: 6, borderBottom: "1px solid #eee" }}
-                    className={r.error || (!r.lowConfidence && r.citedControls.length > 0 && !r.verified) ? "invalid" : ""}
-                  >
-                    {r.error ? "Error" : statusFor(r)}
-                  </td>
-                  <td style={{ verticalAlign: "top", padding: 6, borderBottom: "1px solid #eee", maxWidth: 320 }}>
-                    {r.error ? r.error : r.remediation}
-                  </td>
+          <div className="table-scroll">
+            <table className="results-table">
+              <thead>
+                <tr>
+                  <th>S.No.</th>
+                  <th>Finding</th>
+                  <th>Matched Controls</th>
+                  <th>Also Relevant</th>
+                  <th>Status</th>
+                  <th>Remediation</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {results.map((r) => {
+                  const alsoRelevant = alsoRelevantFor(r);
+                  return (
+                    <tr key={r.sNo}>
+                      <td className="col-num">{r.sNo}</td>
+                      <td className="col-finding">{r.findingText}</td>
+                      <td className="col-controls">
+                        {r.citedControls.length === 0 ? (
+                          <span className="cell-empty">—</span>
+                        ) : (
+                          r.citedControls.map((id) => {
+                            const invalid = r.invalidCitations.includes(id);
+                            const score = scoreFor(r, id);
+                            return (
+                              <span
+                                key={id}
+                                className={`chip ${invalid ? "chip-invalid" : "chip-cited"}`}
+                              >
+                                <span className="chip-id">{id}</span>
+                                {score !== undefined && (
+                                  <span className="chip-score">{score.toFixed(2)}</span>
+                                )}
+                                {invalid && (
+                                  <span className="chip-flag" title="Not found in corpus">
+                                    ⚠
+                                  </span>
+                                )}
+                              </span>
+                            );
+                          })
+                        )}
+                      </td>
+                      <td className="col-controls">
+                        {alsoRelevant.length === 0 ? (
+                          <span className="cell-empty">—</span>
+                        ) : (
+                          alsoRelevant.map((id) => (
+                            <span key={id} className="chip chip-relevant">
+                              <span className="chip-id">{id}</span>
+                            </span>
+                          ))
+                        )}
+                      </td>
+                      <td>
+                        <span className={`status-pill ${statusClass(r)}`}>
+                          {r.error ? "Error" : statusFor(r)}
+                        </span>
+                      </td>
+                      <td className="col-remediation">
+                        {r.error ? (
+                          r.error
+                        ) : (
+                          <>
+                            <p
+                              className={`remediation-text${
+                                expandedRows.has(r.sNo) ? " expanded" : ""
+                              }`}
+                            >
+                              {r.remediation}
+                            </p>
+                            {r.remediation.length > REMEDIATION_PREVIEW_CHARS && (
+                              <button
+                                type="button"
+                                className="row-toggle"
+                                onClick={() => toggleRow(r.sNo)}
+                              >
+                                {expandedRows.has(r.sNo) ? "Show less" : "Show more"}
+                              </button>
+                            )}
+                          </>
+                        )}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
 
-          <button onClick={handleExportCsv} disabled={processing}>
+          <button className="export-btn" onClick={handleExportCsv} disabled={processing}>
             Download as CSV
           </button>
         </section>
