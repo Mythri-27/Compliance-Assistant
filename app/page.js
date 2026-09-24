@@ -151,6 +151,7 @@ export default function Home() {
             citedControls: [],
             invalidCitations: [],
             rerankedControlIds: [],
+            invalidReranked: [],
           },
         ]);
       }
@@ -259,11 +260,17 @@ export default function Home() {
                         {alsoRelevant.length === 0 ? (
                           <span className="cell-empty">—</span>
                         ) : (
-                          alsoRelevant.map((id) => (
-                            <span key={id} className="chip chip-relevant">
-                              <span className="chip-id">{id}</span>
-                            </span>
-                          ))
+                          alsoRelevant.map((id) => {
+                            const invalid = (r.invalidReranked ?? []).includes(id);
+                            return (
+                              <span key={id} className={`chip ${invalid ? "chip-invalid" : "chip-relevant"}`}>
+                                <span className="chip-id">{id}</span>
+                                {invalid && (
+                                  <span className="chip-flag" title="Not found in corpus">⚠</span>
+                                )}
+                              </span>
+                            );
+                          })
                         )}
                       </td>
                       <td>
@@ -277,9 +284,8 @@ export default function Home() {
                         ) : (
                           <>
                             <p
-                              className={`remediation-text${
-                                expandedRows.has(r.sNo) ? " expanded" : ""
-                              }`}
+                              className={`remediation-text${expandedRows.has(r.sNo) ? " expanded" : ""
+                                }`}
                             >
                               {r.remediation}
                             </p>

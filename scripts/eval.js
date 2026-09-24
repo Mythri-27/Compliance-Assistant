@@ -90,6 +90,16 @@ async function main() {
       const rerankedPrecision = rerankedIds.length ? rerankedTruePositives / rerankedIds.length : null;
       const rerankedRecall = expectedControlIds.length ? rerankedTruePositives / expectedControlIds.length : null;
 
+      // Cited precision/recall: same math, applied to what the remediation actually cites
+      const citedIds = result.citedControls ?? [];
+      const citedTP = citedIds.filter((id) => expectedSet.has(id)).length;
+      const citedPrecision = citedIds.length ? citedTP / citedIds.length : null;
+      const citedRecall = expectedControlIds.length ? citedTP / expectedControlIds.length : null;
+
+      // What reranked adds on top of cited, and how much of it is right
+      const rerankedOnly = rerankedIds.filter((id) => !citedSet.has(id));
+      const rerankedOnlyHits = rerankedOnly.filter((id) => expectedSet.has(id)).length;
+
       const retrievedControlScores = (result.controlScores ?? []).map((cs) => ({
         controlId: cs.controlId,
         score: Number(cs.score.toFixed(4)),
@@ -134,6 +144,9 @@ async function main() {
           }))
         ),
         worstRankInFramework: worstRank,
+        citedPrecision, citedRecall,
+        rerankedOnlyCount: rerankedOnly.length, rerankedOnlyHits,
+        invalidReranked: (result.invalidReranked ?? []).join("; "),
       };
       rows.push(row);
 
@@ -144,6 +157,10 @@ async function main() {
       console.log(`${i + 1}/${evalSet.length} — retrieval ${retrievalHit ? "✅" : "❌"}  recall ${rStr}  precision ${pStr}  |  reranked recall ${rrStr}  reranked precision ${rpStr}  citation ${citationHit ? "✅" : "❌"}  ${result.verified ? "verified" : "⚠️ invalid citation"}`);
       console.log(`    retrieved: ${row.retrievedCount} | relevant: ${row.relevantRetrievedCount} | irrelevant: ${row.irrelevantRetrievedCount} | score range: ${scoreMin === null ? "n/a" : `${scoreMin.toFixed(2)} -${scoreMax.toFixed(2)}`}`);
       console.log(`    reranked (${rerankedIds.length}): ${rerankedIds.join(", ") || "none"}`);
+      const cpStr = citedPrecision === null ? "n/a" : `${(citedPrecision * 100).toFixed(0)}%`;
+      const crStr = citedRecall === null ? "n/a" : `${(citedRecall * 100).toFixed(0)}%`;
+      console.log(`    cited recall ${crStr} cited precision ${cpStr} | reranked adds ${rerankedOnly.length} (${rerankedOnlyHits} correct)`);
+
       console.log(`    ranks (within own framework): ${rankRecords.map((r) => `${r.controlId}=${r.found ? `#${r.rank + 1}` : "BELOW-THRESHOLD"}`).join(", ")}`);
     }
     catch (err) {
@@ -157,6 +174,7 @@ async function main() {
         retrievedControlScores: "", scoreMin: null, scoreMax: null, scoreAvg: null,
         expectedControlRanks: "", worstRankInFramework: null,
         error: err.message ?? String(err),
+        citedPrecision: null, citedRecall: null, rerankedOnlyCount: 0, rerankedOnlyHits: 0, invalidReranked: "",
       });
       console.log(`${i + 1}/${evalSet.length} — ❌ ERROR: ${err.message ?? err}`);
     }
@@ -180,6 +198,12 @@ async function main() {
   const avgRecall = recRows.length ? (recRows.reduce((acc, r) => acc + r.contextRecall, 0) / recRows.length) * 100 : null;
   const avgRerankedPrecision = rerankedPrecRows.length ? (rerankedPrecRows.reduce((acc, r) => acc + r.rerankedPrecision, 0) / rerankedPrecRows.length) * 100 : null;
   const avgRerankedRecall = rerankedRecRows.length ? (rerankedRecRows.reduce((acc, r) => acc + r.rerankedRecall, 0) / rerankedRecRows.length) * 100 : null;
+  const citedPrecRows = okRows.filter((r) => r.citedPrecision !== null);
+  const citedRecRows = okRows.filter((r) => r.citedRecall !== null);
+  const avgCitedPrecision = citedPrecRows.length ? (citedPrecRows.reduce((a, r) => a + r.citedPrecision, 0) / citedPrecRows.length) * 100 : null;
+  const avgCitedRecall = citedRecRows.length ? (citedRecRows.reduce((a, r) => a + r.citedRecall, 0) / citedRecRows.length) * 100 : null;
+  const extraTotal = okRows.reduce((s, r) => s + r.rerankedOnlyCount, 0);
+  const extraHits = okRows.reduce((s, r) => s + r.rerankedOnlyHits, 0);
 
   console.log("\n--- Summary ---");
   if (rows.length - nOk > 0) console.log(`Errored:                 ${rows.length - nOk}/${rows.length} (excluded from rates below)`);
@@ -191,6 +215,9 @@ async function main() {
   console.log(`Citation hit rate:       ${citationHitRate === null ? "n/a" : `${citationHitRate.toFixed(1)}% (${okRows.filter((r) => r.citationHit).length}/${nOk})`}`);
   console.log(`Citation validity rate:  ${citationValidityRate === null ? "n/a" : `${citationValidityRate.toFixed(1)}% (${okRows.filter((r) => r.verified).length}/${nOk})`}`);
   console.log(`Low-confidence rate:     ${lowConfidenceRate === null ? "n/a" : `${lowConfidenceRate.toFixed(1)}% (${okRows.filter((r) => r.lowConfidence).length}/${nOk})`}`);
+  console.log(`Cited recall:           ${avgCitedRecall === null ? "n/a" : `${avgCitedRecall.toFixed(1)}% avg`}`);
+  console.log(`Cited precision:        ${avgCitedPrecision === null ? "n/a" : `${avgCitedPrecision.toFixed(1)}% avg`}`);
+  console.log(`Reranked-only additions: ${extraHits}/${extraTotal} correct`);
 
   // Rank-based recall table — "if we only kept top-N per framework instead
   // of score-thresholding, what fraction of expected controls would we
@@ -209,7 +236,7 @@ async function main() {
   });
 
   // Write CSVs
-  const headers = ["S.No.", "Finding", "Expected Controls", "Cited Controls","Remediation", "Reranked Controls", "Retrieval Hit", "Context Recall", "Context Precision", "Reranked Recall", "Reranked Precision", "Citation Hit", "Missed Expected", "Invalid Citations", "Verified", "Low Confidence", "Retrieved Count", "Relevant Retrieved Count", "Irrelevant Retrieved Count", "Retrieved Control Scores", "Score Min", "Score Max", "Score Average", "Expected Control Ranks", "Worst Rank In Framework", "Error"];
+  const headers = ["S.No.", "Finding", "Expected Controls", "Cited Controls", "Remediation", "Reranked Controls", "Retrieval Hit", "Context Recall", "Context Precision", "Reranked Recall", "Reranked Precision", "Citation Hit", "Missed Expected", "Invalid Citations", "Verified", "Low Confidence", "Retrieved Count", "Relevant Retrieved Count", "Irrelevant Retrieved Count", "Retrieved Control Scores", "Score Min", "Score Max", "Score Average", "Expected Control Ranks", "Worst Rank In Framework", "Cited Recall", "Cited Precision", "Reranked-Only Count", "Reranked-Only Hits", "Invalid Reranked", "Error"];
   const csvData = [
     headers,
     ...rows.map((r) => [
@@ -221,7 +248,11 @@ async function main() {
       r.citationHit, r.missedExpected, r.invalidCitations, r.verified, r.lowConfidence,
       r.retrievedCount, r.relevantRetrievedCount, r.irrelevantRetrievedCount,
       r.retrievedControlScores, r.scoreMin, r.scoreMax, r.scoreAvg,
-      r.expectedControlRanks, r.worstRankInFramework, r.error ?? "",
+      r.expectedControlRanks, r.worstRankInFramework,
+      fmtPct(r.citedRecall !== null ? r.citedRecall * 100 : null),
+      fmtPct(r.citedPrecision !== null ? r.citedPrecision * 100 : null),
+      r.rerankedOnlyCount, r.rerankedOnlyHits, r.invalidReranked,
+      r.error ?? "",
     ]),
   ];
 

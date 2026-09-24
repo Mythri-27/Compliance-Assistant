@@ -13,7 +13,7 @@
   },
   {
     "findingText": "The customer support chatbot application directly appends untrusted user chat history into its LLM prompt context template without delimiters or input sanitization, allowing indirect prompt injection.",
-    "expectedControlIds": ["LLM01:2025", "A01:2025", "ISO27001-A.8.28", "SOC2-CC6.6"]
+    "expectedControlIds": ["LLM01:2025", "A05:2025", "ISO27001-A.8.28", "SOC2-CC6.6"]
   },
   {
     "findingText": "An internal AI agent has been granted unrestricted read/write access to the entire corporate database cluster rather than a restricted, read-only data view, creating an unnecessary exposure vector.",
@@ -21,7 +21,7 @@
   },
   {
     "findingText": "The internal document summaries pipeline processes multi-tenant uploads using a model that caches embedding parameters across sessions, exposing one customer's hidden context parameters to another user's search query.",
-    "expectedControlIds": ["LLM08:2025", "A01:2025", "ISO27001-A.8.3", "SOC2-CC6.5"]
+    "expectedControlIds": ["LLM08:2025", "A01:2025", "ISO27001-A.8.3", "SOC2-CC6.3","SOC2-C1.1"]
   },
   {
     "findingText": "The generative AI coding assistant platform passes LLM-generated SQL statements directly to the backend execution engine without schema validations or structure checks.",
@@ -41,7 +41,7 @@
   },
   {
     "findingText": "The user password reset workflow utilizes an obsolete, weak pseudo-random number generator (PRNG) to produce temporary verification tokens, allowing attackers to predict active recovery parameters.",
-    "expectedControlIds": ["A04:2025", "ISO27001-A.8.24", "SOC2-CC6.7"] 
+    "expectedControlIds": ["A04:2025", "ISO27001-A.8.24", "SOC2-CC6.1"] 
   },
   {
     "findingText": "The system architecture lacks automated mechanisms to safely catch or strip low-level memory error logs from server responses, exposing structural stack details to public API requests.",
@@ -57,7 +57,7 @@
   },
   {
     "findingText": "The primary identity provider relies on a configuration where user access sessions remain valid for 30 consecutive days without forcing re-authentication or device-compliance validation.",
-    "expectedControlIds": ["A07:2025", "ISO27001-A.5.15", "SOC2-CC6.2"]
+    "expectedControlIds": ["A07:2025", "ISO27001-A.8.5", "SOC2-CC6.2"]
   },
   {
     "findingText": "The vendor risk assessment matrix evaluates third-party platform security postures exactly once at contract signing, omitting active performance checks or SLA reviews for systemic cloud vendors.",
@@ -65,6 +65,6 @@
   },
   {
     "findingText": "An internal data ingestion pipeline dynamically pulls model checkpoint fine-tuning weights from public cloud shares without running structural authenticity or data poisoning validations.",
-    "expectedControlIds": ["LLM03:2025","LLM04:2025", "A08:2025", "ISO27001-A.5.21", "SOC2-CC8.1"]
+    "expectedControlIds": ["LLM03:2025","LLM04:2025", "A08:2025", "ISO27001-A.5.21", "SOC2-CC6.8","A03:2025"]
   }
 ]

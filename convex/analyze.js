@@ -6,7 +6,7 @@ import { internal } from "./_generated/api";
 import { embedText, generateRemediation } from "./gemini";
 
 const FRAMEWORKS = ["OWASP_WEB", "OWASP_LLM", "SOC2", "ISO27001"];
-const PER_FRAMEWORK_K = 100; // top-k *within each framework*, not overall
+const PER_FRAMEWORK_K = 15; // top-k *within each framework*, not overall
 // Below this cosine similarity, we don't trust the match — surface "no
 // relevant control found" instead of letting the model force an answer.
 // This threshold is a starting guess; tune it against a real eval set
@@ -112,27 +112,32 @@ export const analyzeFinding = action({
       matchedControls.map((c) => ({ controlId: c.controlId, sourceDoc: c.sourceDoc, text: c.text }))
     );
 
-    // 5. Verify every cited control ID actually exists in the corpus
+    // 5. Verify every ID the model returned, cited AND reranked, exists in the corpus.
+    const rerankedControlIds = generated.relevant_controls;
+    const idsToCheck = [...new Set([...generated.cited_controls, ...rerankedControlIds])];
     const checks = await Promise.all(
-      generated.cited_controls.map(async (id) => ({
+      idsToCheck.map(async (id) => ({
         id,
         exists: await ctx.runQuery(internal.data.controlExists, { controlId: id }),
       }))
     );
-    const invalidCitations = checks.filter((c) => !c.exists).map((c) => c.id);
+    const missing = new Set(checks.filter((c) => !c.exists).map((c) => c.id));
+    const invalidCitations = generated.cited_controls.filter((id) => missing.has(id));
+    const invalidReranked = rerankedControlIds.filter((id) => missing.has(id));
 
     // 6. Store + return
     const result = {
       findingText,
       retrievedControlIds: matchedControls.map((c) => c.controlId),
-      rerankedControlIds: generated.relevant_controls,
+      rerankedControlIds,
       controlScores,
       topScore,
       lowConfidence: false,
       remediation: generated.remediation,
       citedControls: generated.cited_controls,
       invalidCitations,
-      verified: invalidCitations.length === 0,
+      invalidReranked,
+      verified: missing.size === 0,
     };
     const id = await ctx.runMutation(internal.data.saveAnalysis, result);
     return { _id: id, ...result };

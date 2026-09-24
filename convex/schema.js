@@ -33,5 +33,6 @@ export default defineSchema({
     verified: v.boolean(), // true iff invalidCitations is empty
     createdAt: v.number(),
     rerankedControlIds: v.optional(v.array(v.string())),
+    invalidReranked: v.optional(v.array(v.string())),
   }),
 });
