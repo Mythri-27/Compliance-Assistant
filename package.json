@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "dev:convex": "convex dev",
-    "build": "next build",
+    "build": "npx convex codegen && next build",
     "start": "next start",
     "ingest": "node scripts/ingest.js",
     "eval": "node scripts/eval.js"
