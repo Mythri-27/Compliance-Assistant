@@ -16,7 +16,7 @@ export default defineSchema({
     .index("by_controlId", ["controlId"])
     .vectorIndex("by_embedding", {
       vectorField: "embedding",
-      dimensions: 768, // matches Gemini text-embedding-004
+      dimensions: 768, // matches Gemini text-embedding-001
       filterFields: ["framework"], // lets vectorSearch scope to one framework at a time
     }),
 

@@ -40,7 +40,7 @@ function parseControlScores(val) {
 }
 
 if (!fs.existsSync(CSV_PATH)) {
-  console.error(`❌ File not found: ${CSV_PATH}`);
+  console.error(`File not found: ${CSV_PATH}`);
   process.exit(1);
 }
 
@@ -51,7 +51,7 @@ const findings = rows.map((r, i) => ({ number: i + 1, finding: r["Finding"] || `
 const totalScores = findings.reduce((sum, f) => sum + f.scores.length, 0);
 
 if (totalScores === 0) {
-  console.error('❌ No control scores found in "Retrieved Control Scores". Check eval.js output.');
+  console.error('No control scores found in "Retrieved Control Scores". Check eval.js output.');
   process.exit(1);
 }
 console.log(`Found ${totalScores} retrieved control scores.\n`);
@@ -107,7 +107,7 @@ const [minRel, maxRel] = [Math.min(...relScores), Math.max(...relScores)];
 const [minIrr, maxIrr] = [Math.min(...irrScores), Math.max(...irrScores)];
 
 console.log(`Relevant controls:   ${minRel.toFixed(4)} - ${maxRel.toFixed(4)}\nIrrelevant controls: ${minIrr.toFixed(4)} - ${maxIrr.toFixed(4)}`);
-console.log(minIrr < maxRel ? "\n⚠️ Significant score overlap exists between relevant and irrelevant controls.\nA threshold alone may not cleanly separate them." : "\n✅ Little/no score overlap detected.\nA score threshold may be effective for filtering.");
+console.log(minIrr < maxRel ? "\nSignificant score overlap exists between relevant and irrelevant controls.\nA threshold alone may not cleanly separate them." : "\nLittle/no score overlap detected.\nA score threshold may be effective for filtering.");
 
 // Write CSV
 const outPath = path.resolve(process.cwd(), "threshold-analysis.csv");
@@ -116,4 +116,4 @@ const csvLines = [
   ...results.map((r) => `${r.threshold.toFixed(2)},${r.precision.toFixed(4)},${r.recall.toFixed(4)},${r.avgRetrieved.toFixed(2)},${r.relevant},${r.irrelevant}`),
 ];
 fs.writeFileSync(outPath, csvLines.join("\n"), "utf8");
-console.log(`\n✅ Summary written to: ${outPath}`);
+console.log(`\n Summary written to: ${outPath}`);

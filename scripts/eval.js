@@ -154,7 +154,7 @@ async function main() {
       const rStr = contextRecall === null ? "n/a" : `${(contextRecall * 100).toFixed(0)}%`;
       const rpStr = rerankedPrecision === null ? "n/a" : `${(rerankedPrecision * 100).toFixed(0)}%`;
       const rrStr = rerankedRecall === null ? "n/a" : `${(rerankedRecall * 100).toFixed(0)}%`;
-      console.log(`${i + 1}/${evalSet.length} — retrieval ${retrievalHit ? "✅" : "❌"}  recall ${rStr}  precision ${pStr}  |  reranked recall ${rrStr}  reranked precision ${rpStr}  citation ${citationHit ? "✅" : "❌"}  ${result.verified ? "verified" : "⚠️ invalid citation"}`);
+      console.log(`${i + 1}/${evalSet.length} — retrieval ${retrievalHit ? "Yes" : "No"}  recall ${rStr}  precision ${pStr}  |  reranked recall ${rrStr}  reranked precision ${rpStr}  citation ${citationHit ? "Yes" : "No"}  ${result.verified ? "verified" : "invalid citation"}`);
       console.log(`    retrieved: ${row.retrievedCount} | relevant: ${row.relevantRetrievedCount} | irrelevant: ${row.irrelevantRetrievedCount} | score range: ${scoreMin === null ? "n/a" : `${scoreMin.toFixed(2)} -${scoreMax.toFixed(2)}`}`);
       console.log(`    reranked (${rerankedIds.length}): ${rerankedIds.join(", ") || "none"}`);
       const cpStr = citedPrecision === null ? "n/a" : `${(citedPrecision * 100).toFixed(0)}%`;
@@ -176,7 +176,7 @@ async function main() {
         error: err.message ?? String(err),
         citedPrecision: null, citedRecall: null, rerankedOnlyCount: 0, rerankedOnlyHits: 0, invalidReranked: "",
       });
-      console.log(`${i + 1}/${evalSet.length} — ❌ ERROR: ${err.message ?? err}`);
+      console.log(`${i + 1}/${evalSet.length} — ERROR: ${err.message ?? err}`);
     }
 
     if (i < evalSet.length - 1) await sleep(PACING_MS);
