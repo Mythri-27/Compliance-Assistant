@@ -6,7 +6,7 @@ generates a remediation grounded in (and citing) those controls.
 
 Stack: **Next.js (JavaScript) + Convex (DB + vector search) + Gemini API.**
 
-**Live demo:** 
+**Live demo:**  https://compliance-assistant-sigma.vercel.app/
 
 ## Problem statement
 
@@ -287,4 +287,4 @@ redeploy of the other half needed unless both changed.
 `package-lock.json` pins `next@14.2.5`, which npm flags as having a known
 vulnerability. Before deploying publicly, bump to a patched 14.2.x release
 (`npm install next@14.2.35` or later) and re-run `npm run build` to confirm
-nothing broke
+nothing broke.
